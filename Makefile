@@ -1,6 +1,9 @@
 CXXFLAGS=-g
 
-all:	overflow-undefined-error heap-use-after-free-error heap-buffer-overflow-error
+all:	overflow-undefined-error heap-use-after-free-error \
+	heap-buffer-overflow-error \
+	stack-buffer-overflow-error \
+	global-buffer-overflow-error
 
 overflow-undefined.exe: overflow-undefined.cc
 	$(CXX) $(CXXFLAGS) -o $@ -fsanitize=undefined $<
@@ -31,6 +34,25 @@ heap-buffer-overflow-error: heap-buffer-overflow.exe
 	@echo ==  Buffer overflow error
 	@echo ========================================
 	-./heap-buffer-overflow.exe
+
+stack-buffer-overflow.exe: stack-buffer-overflow.cc
+	$(CXX) $(CXXFLAGS) -o $@ -fsanitize=address $<
+
+stack-buffer-overflow-error: stack-buffer-overflow.exe
+	@echo ========================================
+	@echo ==  Buffer overflow error
+	@echo ========================================
+	-./stack-buffer-overflow.exe
+
+global-buffer-overflow.exe: global-buffer-overflow.cc
+	$(CXX) $(CXXFLAGS) -o $@ -fsanitize=address $<
+
+global-buffer-overflow-error: global-buffer-overflow.exe
+	@echo ========================================
+	@echo ==  Buffer overflow error
+	@echo ========================================
+	-./global-buffer-overflow.exe
+
 
 clean::
 	-rm -f *.o
