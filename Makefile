@@ -35,3 +35,4 @@ heap-buffer-overflow-error: heap-buffer-overflow.exe
 clean::
 	-rm -f *.o
 	-rm -f *.exe
+	-rm -rf *.dSYM # macos
