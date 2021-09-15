@@ -3,7 +3,8 @@ CXXFLAGS=-g
 all:	overflow-undefined-error heap-use-after-free-error \
 	heap-buffer-overflow-error \
 	stack-buffer-overflow-error \
-	global-buffer-overflow-error
+	global-buffer-overflow-error \
+	uninit-memory-read-error
 
 overflow-undefined.exe: overflow-undefined.cc
 	$(CXX) $(CXXFLAGS) -o $@ -fsanitize=undefined $<
@@ -53,6 +54,18 @@ global-buffer-overflow-error: global-buffer-overflow.exe
 	@echo ========================================
 	-./global-buffer-overflow.exe
 
+uninit-memory-read.exe: uninit-memory-read.cc
+	$(CXX) $(CXXFLAGS) -o $@ -fsanitize=memory $<
+
+uninit-memory-read-error: uninit-memory-read.exe
+	@echo ========================================
+	@echo ==  Uninitlized memory read
+	@echo ========================================
+	@echo This will not cause an error
+	./uninit-memory-read.exe 5
+	@echo Any value other than 5 will cause an error
+	-./uninit-memory-read.exe 2
+	-./uninit-memory-read.exe 7
 
 clean::
 	-rm -f *.o
