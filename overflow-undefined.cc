@@ -24,8 +24,7 @@
 
 int isTmax(int x) { return (x > 0) && ((x+1) < 0); }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
     int x = strtol(argv[1], NULL, 0);
     printf("isTMax(%x) = %d\n", x, isTmax(x));
 }
