@@ -32,7 +32,7 @@ heap-buffer-overflow.exe: heap-buffer-overflow.cc
 
 heap-buffer-overflow-error: heap-buffer-overflow.exe
 	@echo ========================================
-	@echo ==  Buffer overflow error
+	@echo ==  Heap buffer overflow error
 	@echo ========================================
 	-./heap-buffer-overflow.exe
 
@@ -41,7 +41,7 @@ stack-buffer-overflow.exe: stack-buffer-overflow.cc
 
 stack-buffer-overflow-error: stack-buffer-overflow.exe
 	@echo ========================================
-	@echo ==  Buffer overflow error
+	@echo ==  Stack buffer overflow error
 	@echo ========================================
 	-./stack-buffer-overflow.exe
 
@@ -50,7 +50,7 @@ global-buffer-overflow.exe: global-buffer-overflow.cc
 
 global-buffer-overflow-error: global-buffer-overflow.exe
 	@echo ========================================
-	@echo ==  Buffer overflow error
+	@echo ==  Global buffer overflow error
 	@echo ========================================
 	-./global-buffer-overflow.exe
 
