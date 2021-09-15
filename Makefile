@@ -1,3 +1,4 @@
+CXX=clang++
 CXXFLAGS=-g
 
 all:	overflow-undefined-error heap-use-after-free-error \
