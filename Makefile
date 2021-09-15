@@ -1,7 +1,10 @@
 CXX=clang++
 CXXFLAGS=-g
 
-all:	overflow-undefined-error heap-use-after-free-error \
+all:	overflow-undefined-error \
+	heap-use-after-free-error \
+	heap-use-dangling-error \
+	heap-shareptr-dangling-error \
 	heap-buffer-overflow-error \
 	stack-buffer-overflow-error \
 	global-buffer-overflow-error \
@@ -27,6 +30,25 @@ heap-use-after-free-error: heap-use-after-free.exe
 	@echo ==  Use after free error
 	@echo ========================================
 	-./heap-use-after-free.exe
+
+heap-use-dangling.exe: heap-use-dangling.cc
+	$(CXX) $(CXXFLAGS) -o $@ -fsanitize=address $<
+
+heap-use-dangling-error: heap-use-dangling.exe
+	@echo ========================================
+	@echo '==  Dangling pointer (not deleted)'
+	@echo ========================================
+	-./heap-use-dangling.exe
+
+heap-shareptr-dangling.exe: heap-shareptr-dangling.cc
+	$(CXX) $(CXXFLAGS) -o $@ -fsanitize=address $<
+
+heap-shareptr-dangling-error: heap-shareptr-dangling.exe
+	@echo ========================================
+	@echo '==  Dangling pointer using std::share_ptr (not deleted)'
+	@echo ========================================
+	-./heap-shareptr-dangling.exe
+
 
 heap-buffer-overflow.exe: heap-buffer-overflow.cc
 	$(CXX) $(CXXFLAGS) -o $@ -fsanitize=address $<
