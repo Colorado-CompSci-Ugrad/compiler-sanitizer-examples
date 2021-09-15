@@ -1,0 +1,23 @@
+heap-shareptr-dangling.cc:12:5: warning: Class 'SpeakUp' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s). [noCopyConstructor]
+    array = new int[100];
+    ^
+heap-shareptr-dangling.cc:12:5: warning: Class 'SpeakUp' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
+    array = new int[100];
+    ^
+heap-shareptr-dangling.cc:10:3: style: Class 'SpeakUp' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  SpeakUp(const char* _say) {
+  ^
+heap-use-dangling.cc:4:3: error: Memory leak: array [memleak]
+  return 0;
+  ^
+heap-use-dangling.cc:3:14: style: Variable 'array' is assigned a value that is never used. [unreadVariable]
+  int *array = new int[100];
+             ^
+heap-use-dangling.cc:3:8: style: Variable 'array' is allocated memory that is never used. [unusedAllocatedMemory]
+  int *array = new int[100];
+       ^
+uninit-memory-read.cc:11:3: error: Memory leak: a [memleak]
+  return 0;
+  ^
+nofile:0:0: information: Cppcheck cannot find all the include files (use --check-config for details) [missingIncludeSystem]
+
